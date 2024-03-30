@@ -1,0 +1,32 @@
+{#  index.twig  #}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BBS</title>
+</head>
+<body>
+<h1>けいじばん</h1>
+
+<form action="./write.php" method="POST">
+タイトル: <input name="title"><br>
+名前: <input name="name"><br>
+本文: <textarea name="body"></textarea><br>
+削除キー: <input name="delete_key"><br>
+<button>書き込む</button>
+</form>
+
+<hr>
+{% for key, val in data %}
+{{ val.title }}: {{ val.created_at }}<br>
+{{ val.name }}<br>
+<pre>{{ val.body }}</pre>
+<form action="./delete.php" method="POST">
+    <input type="hidden" name="id" value="{{ val.bbs_id }}">
+    削除キー<input name="delete_key">
+    <button>削除</button>
+</form>
+<hr>
+{% endfor %}
+
+</body>
+</html>
